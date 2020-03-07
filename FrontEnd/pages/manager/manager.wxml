@@ -1,0 +1,21 @@
+<!--周莲-->
+  <view class="index-section">
+    <navigator url="/pages/guancourse/guancourse" class="section-title">课程管理</navigator>
+</view>
+ <view class="index-section">
+    <navigator url="/pages/guanresource/guanresource" class="section-title">资源管理</navigator>
+</view>
+ <view class="index-section">
+    <navigator url="/pages/guancomment/guancomment" class="section-title">评论管理</navigator>
+</view>
+ <view class="index-section">
+    <navigator url="/pages/guanfile/guanfile" class="section-title">文件管理</navigator>
+</view>
+
+
+
+
+
+
+
+

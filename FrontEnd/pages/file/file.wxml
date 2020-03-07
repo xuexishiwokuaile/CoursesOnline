@@ -1,0 +1,12 @@
+<!--周莲-->
+<!--pages/guanfile/guanfile.wxml-->
+<!--pages/guancomment/guancomment.wxml-->
+<block wx:for="{{files}}"class="yes">
+<view class="br">
+        <view class="item">
+            <video  class="video" src="{{item.url}}"></video>
+<image src=
+"/images/delete.png" class="reject" bindtap='reject' id="{{item.file_id}}"></image>
+        </view>
+        </view>
+    </block>

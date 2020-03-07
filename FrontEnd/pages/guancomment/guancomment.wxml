@@ -1,0 +1,16 @@
+<!--pages/guancomment/guancomment.wxml-->
+<!--周莲-->
+<block wx:for="{{comments}}"class="yes">
+<view class="br">
+        <view class="item">
+        <image src=
+"{{item.avatarUrl}}" class="img"></image>
+            <text  class="name">{{item.nickName}}</text>
+            <text class="text">{{item.content}}</text>
+            <image src=
+"/images/pass.png" class="pass" bindtap='pass' id="{{item.commentId}}"></image>
+<image src=
+"/images/delete.png" class="reject" bindtap='reject' id="{{item.commentId}}"></image>
+        </view>
+        </view>
+    </block>

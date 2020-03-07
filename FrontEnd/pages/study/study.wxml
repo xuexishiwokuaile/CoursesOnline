@@ -1,0 +1,4 @@
+<!--pages/study.wxml-->
+<block wx:for="{{list}}">
+<video src="{{item.url}}"  style='margin:30rpx' mode="widthFix"></video>
+</block>

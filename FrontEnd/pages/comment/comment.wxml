@@ -1,0 +1,12 @@
+<!--周莲-->
+ <view class="index-section">
+    <view class="section-title">历史记录
+    </view>
+    <view class="section-content">
+      <navigator url=""  class="section-item" wx:for="{{list}}">
+        <image src="{{item.imgUrl}}" class="section-img" mode="widthFix"/>
+        <text class="section-name">{{item.Cname}}</text>
+      </navigator>
+    </view>
+  </view>
+

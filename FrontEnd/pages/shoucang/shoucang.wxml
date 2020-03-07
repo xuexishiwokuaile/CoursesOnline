@@ -1,0 +1,27 @@
+<!--周莲-->
+ <view class="index-section">
+    <view class="section-title">收藏的课程
+    </view>
+    <view class="section-content">
+      <navigator url=""  class="section-item" wx:for="{{list}}">
+        <image src="/images/home.png" class="section-img" mode="widthFix"/>
+        <text class="section-name">{{item.Cname}}</text>
+        <image bindtap="delete" src="/images/yishou.png" class="deletebutton" id="{{item.Cid}}" wx:if='{{isCollected}}'></image> 
+        
+        <text class="section-price">{{item.University}}</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="index-section">
+    <view class="section-title">收藏的资源
+    </view>
+    <view class="section-content">
+      <navigator url=""  class="section-item" wx:for="{{reslist}}">
+        <image src="/images/home.png" class="section-img" mode="widthFix"/>
+        <text class="section-name">{{item.Cname}}</text>
+        <image bindtap="delete2" src="/images/yishou.png" class="deletebutton" id="{{item.resId}}"></image>
+       
+       
+      </navigator>
+    </view>
+  </view>

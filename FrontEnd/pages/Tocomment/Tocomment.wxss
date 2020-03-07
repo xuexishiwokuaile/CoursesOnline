@@ -1,0 +1,4 @@
+.page{margin:10rpx;}
+.weui-btn{background:rgb(255, 105, 125)!important;color:white;}
+.weui-cells::before{border-top: 0!important;}
+.weui-cells{margin-top:15px;}

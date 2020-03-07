@@ -1,0 +1,64 @@
+<!--周莲-->
+<!--question.wxml-->
+<view class="container">
+    <view class="question-wrp">
+        <view class="question-item">
+         
+            <text class="que-title" space="ensp" >{{name}}   {{score}}
+            </text>
+            <view class="que-content">
+            <text class="hint-content {{ellipsis ?'info' :'hideninfo'}}">
+                {{info}}
+            </text>
+            <view class='bg-white-ellipsis' bindtap='ellipsis'>
+              <image class='img-ellipsis' src="{{ellipsis?'../../images/down.png':'../../images/up.png'}}"></image>
+            </view>
+            </view>
+          
+            
+            <view class="que-follow">
+                <view class="left">
+                    <view class="watch" bindtap='comment'>
+                        <image src="../../images/write.png"></image>
+                        <text>评论</text>
+                    </view>
+                    <view class="watch" bindtap='score'>
+                        <image src="../../images/pingfen.png"></image>
+                        <text>评分</text>
+                    </view>
+                    
+                </view>
+                
+                <view class="right" bindtap='shoucang' wx:if="{{!iscollect}}">
+                  收藏
+                </view>
+                <view class="right" bindtap='shoucang' wx:if="{{iscollect}}">
+                  已收藏
+                </view>
+            </view>
+            
+        </view>
+    </view>
+  
+
+<view class="br">
+
+        <view class="item">
+            <navigator url="/pages/study/study?resid={{course}}"><text class="chapter_name">全部视频</text></navigator><button class="button" bindtap='upvideo' id="{{item.name}}">添加</button>
+        </view>
+        
+  </view>
+    <view bindtap='isshow'>评论</view>
+<block wx:for="{{comments}}"class="yes">
+<view class="br">
+        <view class="{{(item.motion!='0')?((item.motion=='1')?'item1':'item2'):'item0'}}">
+        <image src=
+"{{item.avatarUrl}}" class="img"></image>
+            <text  class="name">{{item.nickName}}</text>
+            <text class="text">{{item.content}}</text>
+        </view>
+        </view>
+    </block>
+ 
+</view>
+

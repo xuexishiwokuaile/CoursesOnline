@@ -1,0 +1,7 @@
+<!--周莲-->
+<!--pages/guantianzi/guantianzi.wxml-->
+<view><input placeholder='请输入资源名' bindinput='input1'></input></view>
+<view><input placeholder='请输入资源领域' bindinput='input2'></input></view>
+<view><input placeholder='请输入资源简介' bindinput='input3'></input></view>
+ <image bindtap="upvideo" class="add" src='../../images/add.png'></image>
+<view><button bindtap='submit'>完成</button></view>

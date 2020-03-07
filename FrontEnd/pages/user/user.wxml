@@ -1,0 +1,42 @@
+<!--pages/user/user.wxml-->
+<view class="userinfo">
+    <image class="userinfo-avatar" src="{{url}}"></image>
+    <text>{{name}}</text>
+</view>
+<view class="userinfo-list">
+  
+    
+     
+     
+      <navigator url='/pages/comment/comment' class="userinfo-item">
+      
+        <icon class="iconfont icon-lishi"></icon>
+ <text class="title" space="ensp">  历史记录</text>
+        <text>></text>
+   </navigator>
+
+      
+    
+     <navigator url='/pages/shoucang/shoucang' class="userinfo-item">
+        <icon class="iconfont icon-shoucang"></icon><text class="title" space="ensp">  收藏列表</text>
+        <text>></text>
+   </navigator>
+    <navigator url='/pages/message/message' class="userinfo-item">
+        <icon class="iconfont icon-xiaoxi"></icon><text class="title" space="ensp">  消息提醒</text>
+        <text>></text>
+   </navigator>
+   <navigator url='' bindtap="kaifazhe" class="userinfo-item">
+        <icon class="iconfont icon-kaifa"></icon><text class="title" space="ensp">  开发者界面</text>
+        <text>></text>
+   </navigator>
+     <navigator url='/pages/echarts/echarts'  class="userinfo-item">
+       <icon class="iconfont icon-xuexi"></icon> <text class="title" space="ensp">  学习情况分析</text>
+        <text>></text>
+   </navigator>
+    <navigator url='/pages/scoreBoard/scoreBoard' class="userinfo-item">
+      
+        <icon class="iconfont icon-rank"></icon>
+ <text class="title" space="ensp">  分数排行榜</text>
+        <text>></text>
+   </navigator>
+</view>

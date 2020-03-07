@@ -1,0 +1,58 @@
+<!--pages/guanresource/guanresource.wxml-->
+<!--周莲-->
+
+<view class="index-body">
+  <swiper class="swiper" autoplay="true" interval="5000" duration="1000" indicator-color="#e8e8e8" indicator-active-color="#a9dd3c">
+    <block wx:for="{{carousel}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image"/>
+      </swiper-item>
+    </block>
+  </swiper>
+ 
+  <view class='search' >
+            <input bindinput='input' type='text'  placeholder='搜索课程资料' confirm-type='search' value="{{inputValue}}" ></input>
+            <icon class="icon" type="search" bindtap='sear' size="14"></icon>
+            
+        </view>
+<navigator url="/pages/guantianzi/guantianzi"> <image src="/images/add.png"class="qiandao"></image> </navigator>
+  <view class="sslist" hidden='{{sslisthidden}}'>
+ 
+   
+    <view class="section-content">
+      <view   class="section-item" wx:for="{{sslist}}" >
+        <image src="{{item.src}}" class="section-img" mode="widthFix"/>
+        <text class="section-name"space="ensp" bindtap="kuang" id="{{item.courseTime}}">{{item.Cname}} {{item.location}} </text>
+        <image  src="/images/delete.png" class="deletebutton" bindtap='delete' id="{{item.Cid}}" ></image>
+       
+        <text class="section-price"  space="ensp"> {{item.Cteacher}}</text>
+      </view>
+   
+
+
+
+</view></view>
+<view><text>{{text}}</text></view>
+<view class="page">
+ <picker bindchange="pickChange" value="{{index}}" range-key="{{'resField'}}" range="{{school}}">
+    <view>
+        当前选择的类型：{{school[index].resField}}
+    </view>
+  </picker>
+</view>
+  <view class="index-section">
+    <view class="section-title">资源列表</view>
+    <view class="section-content">
+      <view   class="section-item" wx:for="{{list}}" >
+        <image src="{{item.imgUrl}}" class="section-img" mode="widthFix"/>
+        <text class="section-name"space="ensp" id="{{item.courseTime}}">{{item.Cname}}</text>
+        <image  src="/images/delete.png"class="deletebutton" bindtap='delete' id="{{item.resId}}" ></image>
+       
+       
+      </view>
+    </view>
+  </view>
+
+
+</view>
+

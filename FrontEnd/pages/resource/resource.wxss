@@ -1,0 +1,145 @@
+/* pages/new/new.wxss */
+page{
+  background-color: #f8f7f7;
+  color:#8B8989;
+  font-family: kaiti
+  }
+/* 搜索框样式 */
+.search
+{
+    width: 80%;
+    border:1rpx solid whitesmoke;
+    border-radius: 80px;
+ 
+
+  
+}
+
+/* 搜索框提示文字样式 */
+.input
+{
+  font-size:27rpx;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-left:30rpx; 
+  justify-content:center;
+}
+
+/* 搜索框小图标 */
+.icon
+{ 
+  position: absolute;
+  right: 10px;
+  top: 7px;
+
+}
+.new-banner-img{
+  background-color: white;
+    width: 80%;
+    border:1rpx solid whitesmoke;
+    border-radius: 80px;
+    margin: 0 auto;
+}
+.goods-content{
+  line-height: 1.5;
+  background-color: #fff;
+  font-size: 28rpx;
+  margin-top: 10rpx;
+}
+.goods-item{
+  display: flex;
+  padding: 20rpx;
+}
+.goods-item:not(:last-child){
+    border-bottom: 1px solid #ddd;
+}
+.goods-img{
+  flex: 1;
+}
+.goods-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 3;
+    padding-left: 30rpx;
+    padding-bottom: 10rpx;
+}
+.goods-name{
+  display: block;
+}
+.goods-price{
+  display: block;
+  color: #ff6600;
+  font-weight: 700;
+}
+.page_bd{
+
+  padding: 10px;
+
+  background-color: snow;
+
+}
+
+.body_head{
+
+  border: 1px solid;
+
+  border-color: beige;
+
+  padding: 10px;
+
+}
+
+.display_show{
+
+  display: block;
+
+  border: 1px solid;
+
+  border-color: beige;
+
+  padding: 10px;
+
+}
+
+.display_none{
+
+  display: none;
+
+}
+.index-section{
+  background-color: #fff;
+  padding: 20rpx 0;
+  margin-top: 20rpx;
+}
+.section-content{
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  border-top:1px solid #ddd;
+  line-height: 1.5;
+}
+.section-item{
+  flex: 0 0 50%;
+  box-sizing: border-box;
+  padding: 20rpx;
+}
+.section-img{
+  width: 100%;
+}
+.section-name{
+  display: block;
+  height: 1.5em;
+  text-align: center;
+  overflow: hidden;
+  color: #8B8989;
+  font-family: 	KaiTi;
+  font-size: 32rpx;
+
+}
+.section-title{
+  padding: 0 16rpx;
+  font-size: 1.5em;
+  color: #66cc33;
+  border-left: 10rpx solid #66cc33;
+  margin-bottom: 20rpx;
+}

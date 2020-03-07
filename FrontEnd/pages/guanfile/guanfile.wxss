@@ -1,0 +1,50 @@
+/* pages/guanfile/guanfile.wxss */
+/* pages/guancomment/guancomment.wxss */
+.br{
+  width: 100%;
+   padding: 5px 5px 5px 5px;
+}
+.item{
+  width: 90%;
+  background-color: #ebebeb;
+  padding: 20rpx 20rpx;
+  margin: 20rpx;
+  border-radius: 20px;
+  align-content: center;
+}
+.name{
+  
+  display: flex;
+  
+
+}
+.text{
+  font-size: 28rpx;
+ 
+}
+.yes{
+  display: block;
+}
+
+.img{
+  width:40px;
+  height:40px;
+  display: flex;
+  float: left;
+}
+.pass{
+  width:40px;
+  height:40px;
+  display: flex;
+  float: right;
+
+}
+.reject{
+width:40px;
+  height:40px;
+  display: flex;
+  float: right;
+}
+.video{
+  width:98%
+}

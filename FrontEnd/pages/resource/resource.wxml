@@ -1,0 +1,33 @@
+<!--pages/new/new.wxml-->
+<!--周莲-->
+
+
+<view class="page">
+ <picker bindchange="pickChange" value="{{index}}" range-key="{{'resField'}}" range="{{array}}">
+    <view>
+        当前选择的课程：{{array[index].resField}}
+    </view>
+  </picker>
+</view>
+
+<view class="index-section">
+   
+    <view class="section-content">
+      <navigator url="/pages/detail/detail?courseid={{item.resId}}" class="section-item" wx:for="{{list}}">
+        <image src="{{item.imgUrl}}" class="section-img" mode="widthFix"/>
+        <text class="section-name">{{item.Cname}}</text>
+       
+      </navigator>
+    </view>
+  </view>
+  <view class="section-title">资源推荐</view>
+  <view class="index-section">
+   
+    <view class="section-content">
+      <navigator url="/pages/detail/detail?id={{item.resId}}" class="section-item" wx:for="{{recolist}}">
+        <image src="{{item.imgUrl}}" class="section-img" mode="widthFix"/>
+        <text class="section-name">{{item.Cname}}</text>
+       
+      </navigator>
+    </view>
+  </view>

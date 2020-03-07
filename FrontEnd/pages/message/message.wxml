@@ -1,0 +1,9 @@
+<!--pages/message/message.wxml-->
+<!--周莲-->
+<view class="br">
+
+        <view class="item" wx:for="{{list}}">
+            <text class="chapter_name">{{item.message}}</text><button class="button" bindtap='know' id="{{item.mid}}">我知道了</button>
+        </view>
+        
+  </view>

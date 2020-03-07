@@ -1,0 +1,22 @@
+<!--周莲-->
+<!--pages/scoreBoard/scoreBoard.wxml-->
+  <view class='CircleList' wx:for='{{list}}'>
+  
+    <!-- 头像、昵称、内容 -->
+    <view class='body-view'>
+      <!-- 头像 -->
+      <view class='left-view'>
+        <image class='user-icon' src='{{item.avatarUrl}}'></image>
+      </view>
+      <view class='right-view'>
+        <!-- 昵称 -->
+        <view class='user-name-view'>
+          <label class='user-name'>{{item.nickName}}</label>
+          
+        </view>
+        <view class="score">{{item.score}}</view>    
+
+       
+</view>
+    </view>
+  </view>

@@ -1,0 +1,5 @@
+/* pages/guantianzi/guantianzi.wxss */
+.add{
+  width:30px;
+  height:30px 
+}
