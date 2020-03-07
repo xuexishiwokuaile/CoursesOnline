@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为ISystemDao接口方法提供sql语句配置 -->
+<mapper namespace="com.xjt.dao.ISystemDao">
+    <!--    CREATED BY CHEN ANRAN-->
+    <!--    2019.7.4-->
+
+    <select id="selectComment" parameterType="String" resultType="com.xjt.model.Comment">
+        SELECT comment.commentId,comment.openId,comment.content,comment.resourceId,user.nickName,user.avatarUrl,comment.motion FROM comment,user WHERE comment.openid=user.openid AND comment.resourceId = #{resourceId}
+    </select>
+
+<!--    显示提供每个领域资源的所有学校-->
+    <select id="selectFieldSchool" resultType="com.xjt.model.Resources">
+        SELECT DISTINCT school FROM (SELECT resField FROM Resource)
+    </select>
+
+    <!--    显示资源列表-->
+    <select id="selectResByField" parameterType="String" resultType="com.xjt.model.Resources">
+        SELECT Cname,resInfo,resId,school,imgUrl FROM Resource WHERE resField = #{resField}
+    </select>
+
+<!--    显示收藏课程-->
+    <select id="selectChosenCourse" parameterType="String" resultType="com.xjt.model.Course">
+        SELECT Course.Cname,Course.Cteacher,Course.location,Course.University,Course.couField,Course.courseTime,Course.Cid FROM Course,user_course WHERE Course.Cid=user_course.Cid AND user_course.openid=#{openid}
+    </select>
+
+<!--    显示提供课程的所有学校-->
+    <select id="selectAllUniversity" resultType="com.xjt.model.Course">
+        SELECT DISTINCT University FROM Course
+    </select>
+
+<!--    显示资源所属的领域-->
+    <select id="selectAllFields" resultType="com.xjt.model.Resources">
+        SELECT DISTINCT resField FROM Resource
+    </select>
+
+<!--    获取资源信息-->
+    <select id="selectResInformation" resultType="com.xjt.model.Resources">
+        SELECT * FROM Resource WHERE resId = #{resId}
+    </select>
+
+    <!--NEW-->
+
+    <!--根据章节id查询章节具体信息-->
+    <select id ="selectChapterInfo" parameterType="java.lang.String" resultType="com.xjt.model.ResFile">
+        SELECT  file_id, ftype, url,chapter FROM file WHERE file_id = #{file_id}
+    </select>
+
+    <!--根据resid获取资源信息-->
+    <select id ="selectResInfoById" parameterType="java.lang.String" resultType="com.xjt.model.Resources">
+        SELECT resId,Cname,resInfo,resField,Upid FROM Resource WHERE  resId = #{resId}
+    </select>
+
+    <!--根据资源id获取章节-->
+    <select id = "selectResChapterInfo" parameterType="java.lang.String" resultType="com.xjt.model.ResFile">
+        SELECT file.file_id ,file.chapter FROM file ,resource_file  WHERE file.file_id = resource_file.file_id AND resource_file.resId = #{resId}
+    </select>
+
+<!--    记录浏览历史-->
+    <insert id="insertHistory" parameterType="String">
+        INSERT INTO dayHistory(openid,resId,date,inTime,outTime) VALUES (#{openid},#{resId},#{date},#{inTime},#{outTime})
+    </insert>
+
+<!--    获取浏览历史-->
+    <select id="selectHistory" resultType="com.xjt.model.Resources" parameterType="String">
+        SELECT Resource.Cname,Resource.resField,Resource.imgUrl FROM Resource,dayHistory WHERE dayHistory.openid=#{openid} AND dayHistory.resId=Resource.resId ORDER BY dayHistory.id DESC
+    </select>
+
+<!--    显示校友圈列表-->
+    <select id="selectMoment" resultType="com.xjt.model.Moment">
+        SELECT Moment.Mid,Moment.content,Moment.openid,Moment.url,user.nickName,user.avatarUrl FROM Moment,user WHERE Moment.openid=user.openid
+    </select>
+<!--    显示资源列表-->
+<!--    <select id="selectFile" resultType="com.xjt.model.ResFile">-->
+<!--        SELECT-->
+<!--    </select>-->
+<!--    计算资源的平均分-->
+    <select id="selectAvgScore" resultType="String" parameterType="String">
+        SELECT AVG(score) FROM resource_score GROUP BY resId HAVING resId=#{resId}
+    </select>
+<!--    插入平均分-->
+    <update id="updateAvgScore" parameterType="String">
+        UPDATE Resource SET score=#{score} WHERE resId=#{resId}
+    </update>
+<!--    显示资源对应的文件-->
+    <select id="selectResFile" parameterType="String" resultType="com.xjt.model.ResFile">
+        SELECT file_audit.url FROM file_audit,resource_file,Resource WHERE Resource.resId = #{resId} AND Resource.resId=resource_file.resId AND resource_file.file_id=file_audit.file_id
+    </select>
+<!--    获取用户对应的消息-->
+    <select id="selectUserMessage" parameterType="String" resultType="com.xjt.model.Message">
+        SELECT message,mid FROM user_message WHERE openid=#{openid}
+    </select>
+    <!--CREATE BY LH 2019.7.10-->
+    <!--用resId获取该资源在user_resource表中出现的次数-->
+    <select id="selectCountUserByResId" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM user_resource WHERE resId = #{resId}
+    </select>
+
+    <!--用resId获取该资源在Resource表中记录的score-->
+    <select id="selectScoreByResId" parameterType="String" resultType="String">
+        SELECT score FROM Resource WHERE resId = #{resId}
+    </select>
+
+    <!--用resId获取dayHistory中访问该课程的用户花费总时间
+    先获取所有的结束时间
+    再获取所有的开始时间
+    转化为int型求差-->
+    <select id="selectOutTimeByResId" parameterType="String" resultType="String">
+        SELECT outTime FROM dayHistory WHERE resId = #{resId}
+    </select>
+    <select id="selectInTimeByResId" parameterType="String" resultType="String">
+        SELECT inTime FROM dayHistory WHERE resId = #{resId}
+    </select>
+
+<!--    显示用户排行榜-->
+    <select id="selectAllUser" resultType="com.xjt.model.User">
+        SELECT openid FROM user
+    </select>
+    <update id="updateScore" parameterType="String">
+        UPDATE user SET score=2*`check`+985 WHERE openid=#{openid}
+    </update>
+    <select id="selectRank" resultType="com.xjt.model.User">
+        SELECT nickName,avatarUrl,score FROM user ORDER BY score DESC
+    </select>
+
+    <!--    针对资源-->
+    <select id ="CollectIs" parameterType="String" resultType="String">
+        SELECT resId FROM user_resource WHERE openid = #{openid}
+    </select>
+    <select id ="AllResourceId" resultType="String">
+        SELECT resId FROM Resource
+    </select>
+</mapper>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.xjt.dao.IUserDao">
+
+<!--    CREATED BY CHEN ANRAN-->
+<!--    2019.7.4-->
+
+    <select id="selectUser" resultType="User" parameterType="long">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        INSERT INTO userInfo(name) VALUES (#{name})
+    </insert>
+
+    <select id="findByUsername" parameterType="Map" resultType="User">
+        SELECT user.name,user.password FROM user WHERE name=#{name}
+    </select>
+
+    <select id="selectUser_id" parameterType="String" resultType="com.xjt.model.User">
+        SELECT openid,nickName from user WHERE openid = #{openid}
+    </select>
+
+    <insert id="insertUserInfo" parameterType="String">
+        insert into user(openid,nickName,avatarUrl) VALUES (#{openid},#{nickname},#{avatarUrl})
+<!--        <foreach collection="infoList" item="infoList" index="index" separator=",">-->
+<!--            (#{infoList.openid},#{infoList.nickName})-->
+<!--        </foreach>-->
+    </insert>
+
+<!--    插入评论-->
+    <insert id="insertComment" parameterType="String">
+        INSERT INTO comment VALUES(#{commentId},#{openid},#{resourceId},#{content},#{motion})
+    </insert>
+    
+<!--    获取收藏资源列表-->
+    <select id="selectFavRes" parameterType="String" resultType="com.xjt.model.Resources">
+        SELECT Resource.resId,Resource.Cname,Resource.resInfo FROM Resource,user_resource WHERE Resource.resId=user_resource.resId AND user_resource.openid=#{openid}
+    </select>
+
+<!--&lt;!&ndash;    显示学校提供的蹭课课程&ndash;&gt;-->
+<!--    <select id="selectCourseBySchool" parameterType="String"  resultType="com.xjt.model.Course">-->
+<!--        SELECT Cname,Cteacher,location,couField,courseTime,Cid FROM Course WHERE University = #{University}-->
+<!--    </select>-->
+    <!--    显示学校提供的蹭课课程-->
+    <!--UPDATE BY LH 2019.7.9-->
+    <select id="selectCourseBySchool" parameterType="String"  resultType="com.xjt.model.Course">
+        SELECT Cname,Cteacher,location,couField,courseTime,Cid  FROM Course
+</select>
+
+
+    <!--    点击课程收藏按钮-->
+    <insert id="insertCourseFavourite" parameterType="String">
+        INSERT INTO user_course VALUES (#{openid},#{Cid})
+    </insert>
+
+<!--    点击资源收藏按钮-->
+    <insert id="insertResourceFavourite" parameterType="String">
+        INSERT INTO user_resource VALUES(#{openid},#{resId})
+    </insert>
+
+    <!--CREATE BY LIJIA JUN-->
+    <!--根据关键字查询课程-->
+    <select id="SearchCourseByKeyword" parameterType="java.lang.String" resultType="com.xjt.model.Course">
+        SELECT Cname,Cteacher,location,couField,courseTime,Cid FROM Course WHERE couField LIKE CONCAT('%',#{couField},'%')
+        UNION
+        SELECT Cname,Cteacher,location,couField,courseTime,Cid FROM  Course WHERE Cname LIKE CONCAT('%',#{Cname},'%')
+        UNION
+        SELECT Cname,Cteacher,location,couField,courseTime,Cid FROM  Course WHERE Cteacher LIKE CONCAT('%',#{Cteacher},'%')
+        UNION
+        SELECT Cname,Cteacher,location,couField,courseTime,Cid FROM  Course WHERE location LIKE CONCAT('%',#{location},'%')
+    </select>
+
+<!--    取消课程收藏-->
+    <delete id="cancelCourseFavourite" parameterType="String">
+        DELETE FROM user_course WHERE openid = #{openid} AND Cid = #{Cid}
+    </delete>
+
+    <!--    取消资源收藏-->
+    <insert id="cancelResourceFavourite" parameterType="String">
+        DELETE FROM user_resource WHERE openid = #{openid} AND resId = #{resId}
+    </insert>
+
+    <!--CREATE BY LIJIA JUN-->
+    <!--    根据关键字查询资源-->
+    <select id="SearchResourceByKeyword" parameterType="java.lang.String" resultType="com.xjt.model.Resources">
+        SELECT resId,Cname,resInfo,resField,Upid FROM Resource WHERE  Cname LIKE CONCAT('%',#{Cname},'%')
+        UNION
+        SELECT resId,Cname,resInfo,resField,Upid FROM Resource WHERE  resInfo LIKE CONCAT('%',#{resInfo},'%')
+        UNION
+        SELECT resId,Cname,resInfo,resField,Upid FROM Resource WHERE  resField LIKE CONCAT('%',#{resField},'%')
+    </select>
+
+    <!--  插入评论到审核区 CREATE BY LH 2019.7.5-->
+    <insert id="insertAuditComment" parameterType="String">
+        INSERT INTO commentAudit VALUES(#{commentId},#{openid},#{resourceId},#{content},#{motion})
+    </insert>
+
+<!--    上传文件-->
+    <insert id="insertFile" parameterType="String">
+        INSERT INTO file VALUES(#{file_id},#{ftype},#{url},#{chapter},#{openid})
+    </insert>
+
+    <insert id="insertResourceFile" parameterType="String">
+        INSERT INTO resource_file VALUES (#{resId},#{file_id})
+    </insert>
+
+    <!--NEW-->
+    <!--根据用户id查找个人上传的资源-->
+    <select id="getUploadResourceList" parameterType="java.lang.String" resultType="com.xjt.model.Resources">
+        SELECT resId,Cname,resField FROM Resource WHERE Upid = #{Upid}
+    </select>
+
+<!--    插入校友圈信息-->
+    <insert id="insertMomentInfo" parameterType="String">
+        INSERT INTO Moment VALUES (#{Mid},#{openid},#{content},#{url})
+    </insert>
+<!--对资源评分-->
+    <insert id="insertResourceScore" parameterType="String">
+        INSERT INTO resource_score VALUES (#{openid},#{resId},#{score})
+    </insert>
+
+<!--    添加签到信息-->
+    <insert id="insertCheck" parameterType="String">
+        INSERT INTO user_check VALUES (#{openid},#{date})
+    </insert>
+
+<!--    获取签到信息-->
+    <select id="selectCheck" parameterType="String" resultType="com.xjt.model.Check">
+        SELECT openid,`date` FROM user_check WHERE openid=#{openid}
+    </select>
+
+<!--    更新签到信息-->
+    <update id="updateCheck" parameterType="String">
+        UPDATE user SET `check`=`check`+1 WHERE openid=#{openid}
+    </update>
+
+<!--    清除签到表的签到数据-->
+    <delete id="deleteDay" parameterType="String">
+        DELETE FROM user_check WHERE openid=#{openid}
+    </delete>
+
+<!--    清除用户表中的连续签到天数-->
+    <update id="deleteCheck" parameterType="String">
+        UPDATE user SET `check`=0 WHERE openid=#{openid}
+    </update>
+
+<!--    从用户表中获取连续签到天数-->
+    <select id="selectCheckDay" parameterType="String" resultType="String">
+        SELECT `check` FROM user WHERE openid=#{openid}
+    </select>
+
+    <!--CREATE BY LH 2019.7.9-->
+
+    <!--查找选资源表中用户个数-->
+    <select id="getUserNumFromUserRes" resultType="int">
+        select count(DISTINCT openid) from user_resource
+    </select>
+
+    <!--查找选资源表中所有的用户id-->
+    <select id="getUserIdFromUserRes" resultType="java.lang.String">
+        select DISTINCT openid from user_resource
+    </select>
+    <!--查找某用户选择的资源数-->
+    <select id="getResNumByOpenid" parameterType="java.lang.String" resultType="int">
+        select count( DISTINCT resId) from user_resource where openid = #{openid}
+    </select>
+    <!--查找某用户选择的全部资源-->
+    <select id="getResByOpenid" parameterType="java.lang.String" resultType="java.lang.String">
+        select DISTINCT resId from user_resource where openid = #{openid}
+    </select>
+    <!--获取推荐资源的信息-->
+    <select id="getRecommendResult" parameterType="java.lang.String" resultType="com.xjt.model.Resources">
+        select * from Resource where resId = #{recommendResult}
+    </select>
+<!--    获取用户上传的文件-->
+    <select id="selectOwnFile" parameterType="String" resultType="com.xjt.model.ResFile">
+        SELECT url,file_id FROM file_audit WHERE openid=#{openid}
+    </select>
+<!--    删除上传的文件-->
+    <delete id="deleteOwnFile" parameterType="String">
+        DELETE FROM file_audit WHERE file_id=#{file_id}
+    </delete>
+<!--    删除消息-->
+    <delete id="deleteMessage" parameterType="String">
+        DELETE FROM user_message WHERE mid=#{mid}
+    </delete>
+<!--    添加校友圈文件信息-->
+<!--    <insert id="insertMomentFile" parameterType="String">-->
+<!--        INSERT INTO moment_file VALUES (#{file_id},#{ftype},#{url},#{openid})-->
+<!--    </insert>-->
+
+<!--    获取收藏的课程id以及所有课程id-->
+    <select id="IsCollect" parameterType="String" resultType="String">
+        SELECT Cid FROM user_course WHERE openid = #{openid}
+    </select>
+    <select id ="AllCourseId" resultType="String">
+        SELECT Cid FROM Course
+    </select>
+
+    <!--CREATE BY LH 2019.7.11-->
+    <select id="getResFieldList" resultType="String">
+        SELECT DISTINCT (resField) FROM Resource
+    </select>
+    <select id="getOutTime" parameterType="String" resultType="String">
+        SELECT dayHistory.outTime FROM dayHistory,Resource WHERE dayHistory.resId = Resource.resId AND Resource.resField = #{handleField} AND dayHistory.openid = #{openid} AND dayHistory.date = #{handleDate}
+    </select>
+    <select id="getInTime" parameterType="String" resultType="String">
+        SELECT dayHistory.inTime FROM dayHistory,Resource WHERE dayHistory.resId = Resource.resId AND Resource.resField = #{handleField} AND dayHistory.openid = #{openid} AND dayHistory.date = #{handleDate}
+    </select>
+
+
+
+
+</mapper>

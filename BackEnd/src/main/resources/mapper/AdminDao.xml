@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IAdminDao接口方法提供sql语句配置 -->
+<mapper namespace="com.xjt.dao.IAdminDao">
+<!--    验证登录信息-->
+    <select id="selectAdmin_id" parameterType="String" resultType="com.xjt.model.Admin">
+        SELECT openid from admin WHERE openid = #{openid}
+    </select>
+<!--    获取管理员信息-->
+    <select id="selectAdminInfo" parameterType="String" resultType="com.xjt.model.Admin">
+        SELECT openid FROM admin WHERE openid=#{openid}
+    </select>
+<!--    插入管理员信息-->
+    <insert id="insertAdminInfo" parameterType="String">
+        insert into admin(openid,nickName,avatarUrl) VALUES (#{openid},#{nickname},#{avatarUrl})
+    </insert>
+<!--    显示待审核评论列表-->
+    <select id="selectCommentAudit"  resultType="com.xjt.model.Comment">
+        SELECT commentAudit.commentId,commentAudit.openId,commentAudit.content,commentAudit.resourceId,commentAudit.motion,user.nickName,user.avatarUrl FROM commentAudit,user WHERE commentAudit.openid=user.openid
+    </select>
+<!--    删除待审核内容-->
+    <delete id="deleteCommentAudit" parameterType="String">
+        DELETE FROM commentAudit WHERE commentId = #{commentId}
+    </delete>
+<!--    获取删除评论的内容-->
+    <select id="getDeleteInfo" parameterType="String" resultType="com.xjt.model.Comment">
+        SELECT openid,resourceId,content,motion FROM commentAudit WHERE commentId = #{commentId}
+    </select>
+    <!--    插入评论-->
+    <insert id="insertComment" parameterType="String">
+        INSERT INTO comment VALUES(#{commentId},#{openid},#{resourceId},#{content},#{motion})
+    </insert>
+<!--    删除课程-->
+    <delete id="deleteCourse" parameterType="String">
+        DELETE FROM Course WHERE Cid=#{Cid}
+    </delete>
+<!--    显示课程-->
+    <select id="selectCourse" resultType="com.xjt.model.Course">
+        SELECT * FROM Course
+    </select>
+<!--    添加课程-->
+    <insert id="insertCourse" parameterType="String">
+        INSERT INTO Course(Cname,Cteacher,location,University,couField,courseTime,Cid) VALUES (#{Cname},#{Cteacher},#{location},#{University},#{couField},#{courseTime},#{Cid})
+    </insert>
+    <!--    显示资源列表-->
+    <select id="selectResByField" parameterType="String" resultType="com.xjt.model.Resources">
+        SELECT Cname,resInfo,resId,school,imgUrl FROM Resource WHERE resField = #{resField}
+    </select>
+    <!--    显示资源所属的领域-->
+    <select id="selectAllFields" resultType="com.xjt.model.Resources">
+        SELECT DISTINCT resField FROM Resource
+    </select>
+<!--    删除资源-->
+    <delete id="deleteResource" parameterType="String">
+        DELETE FROM Resource WHERE resId=#{resId}
+    </delete>
+<!--    添加资源-->
+    <insert id="insertResource" parameterType="String">
+        INSERT INTO Resource(resId,Cname,resField,resInfo,school) VALUES (#{resId},#{Cname},#{resField},#{resInfo},#{school})
+    </insert>
+<!--    获取文件表中的所有文件-->
+    <select id="selectAllFile" resultType="com.xjt.model.ResFile">
+        SELECT * FROM file
+    </select>
+<!--    获得待审核文件的信息-->
+    <select id="selectDeleteFileInfo" parameterType="String" resultType="com.xjt.model.ResFile">
+        SELECT * FROM file WHERE file_id=#{file_id}
+    </select>
+<!--    插入到待审核表中-->
+    <insert id="insertAuditFile" parameterType="String">
+        INSERT INTO file_audit VALUES (#{file_id},#{ftype},#{url},#{chapter},#{openid})
+    </insert>
+<!--    删除原来表中的内容-->
+    <delete id="deleteAuditedFile" parameterType="String">
+        DELETE FROM file WHERE file_id=#{file_id}
+    </delete>
+<!--    获得收藏了文件对应资源的用户-->
+    <select id="selectAllUser" parameterType="String" resultType="com.xjt.model.Message">
+        SELECT user.openid, Resource.resId,Resource.Cname FROM user,user_resource,resource_file,file,Resource WHERE user.openid=user_resource.openid AND user_resource.resId=resource_file.resId AND resource_file.resId = Resource.resId AND resource_file.file_id=file.file_id AND file.file_id=#{file_id}
+    </select>
+<!--    给收藏了资源的用户推送消息-->
+    <insert id="insertMessage" parameterType="String">
+        INSERT INTO user_message VALUES (#{openid},#{message},#{mid})
+    </insert>
+</mapper>
