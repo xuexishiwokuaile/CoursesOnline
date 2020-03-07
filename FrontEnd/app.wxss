@@ -1,0 +1,35 @@
+/**app.wxss**/
+@font-face {
+  font-family: 'iconfont';  /* project id 1290179 */
+  src: url('//at.alicdn.com/t/font_1290179_aw0zafqihqn.eot');
+  src: url('//at.alicdn.com/t/font_1290179_aw0zafqihqn.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1290179_aw0zafqihqn.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1290179_aw0zafqihqn.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1290179_aw0zafqihqn.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1290179_aw0zafqihqn.svg#iconfont') format('svg');
+}
+
+.iconfont {
+ font-family:"iconfont" !important;
+ font-size:43rpx;
+ font-style:normal;
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+}
+/*本项目使用的6个图标 */
+.icon-lishi:before{content: '\e600';}
+.icon-shoucang:before{content: '\e609';}
+.icon-xiaoxi:before{content: '\e628';}
+.icon-kaifa:before{content: '\e620';}
+.icon-xuexi:before{content: '\ea10';}
+.icon-rank:before{content: '\e62a';}
+
+.container {
+  
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+} 

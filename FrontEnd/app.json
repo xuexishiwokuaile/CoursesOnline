@@ -1,0 +1,67 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/resource/resource",
+    "pages/manager/manager",
+    "pages/user/user",
+    
+    "pages/file/file",
+    "pages/shoucang/shoucang",
+    "pages/comment/comment",
+    "pages/Tocomment/Tocomment",
+    "pages/detail/detail",
+    "pages/study/study",
+   
+    "pages/signIn/signIn",
+    "pages/pongyoucircle/pongyoucircle",
+    "pages/post/post",
+    "pages/guancourse/guancourse",
+    "pages/guanresource/guanresource",
+    "pages/guancomment/guancomment",
+    "pages/guantianke/guantianke",
+    "pages/guantianzi/guantianzi",
+    "pages/guanfile/guanfile",
+    "pages/Toscore/Toscore",
+    "pages/message/message",
+    "pages/echarts/echarts",
+    "pages/scoreBoard/scoreBoard"
+  ],
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#66cc33",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "蹭课",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_fill.png"
+      },
+      {
+        "pagePath": "pages/resource/resource",
+        "text": "游课",
+        "iconPath": "images/goods_new.png",
+        "selectedIconPath": "images/goods_new_fill.png"
+      },
+      {
+        "pagePath": "pages/pongyoucircle/pongyoucircle",
+        "text": "享课",
+        "iconPath": "images/item2.png",
+        "selectedIconPath": "images/item2_fill.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "images/people.png",
+        "selectedIconPath": "images/people_fill.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundColor": "#f8f8f8",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "雨课有瓜",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}
